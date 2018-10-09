@@ -1,0 +1,14 @@
+    .card-panel {
+        padding: 10px;
+        margin: 10px !important;
+        min-width: 500px;
+    }
+    
+    .card {
+        margin: 0;
+    }
+    
+    .picture {
+        border-radius: 50%;
+        width: 80px;
+    }

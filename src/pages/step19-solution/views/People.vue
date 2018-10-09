@@ -1,0 +1,98 @@
+<template>
+    <div>
+        <div class="header row">
+            <h1 class="col s12 flow-text">You have {{people.length}} contacts</h1>
+            <search-bar @search="filterPeople"></search-bar>
+        </div>
+        <section class="container">
+            <sfeir-card :key="person.id" v-for="person in people" :person="person" @delete="deletePerson"></sfeir-card>
+        </section>
+        <md-dialog ref="dialog">
+            <md-dialog-title>Contact informations</md-dialog-title>
+            <md-dialog-content>
+                <sfeir-form @save="addPerson" @cancel="hideDialog"></sfeir-form>
+            </md-dialog-content>
+        </md-dialog>
+
+        <md-button class="md-fab md-fab-bottom-right md-primary" @click="showDialog">
+            <md-icon>add</md-icon>
+        </md-button>
+    </div>
+</template>
+
+<script>
+    import CardPanel from '../components/CardPanel.vue'
+    import Form from '../components/Form.vue'
+    import peopleService from '../services/PeopleService.js';
+    import SearchBar from '../components/SearchBar.vue'
+    import { mapState } from 'vuex'
+    import * as types from '../store/mutations-types'
+
+    export default {
+        components: {
+            'sfeir-card': CardPanel,
+            'sfeir-form': Form,
+            'search-bar': SearchBar
+        },        
+        /*computed: mapState({
+            people: state => state.people,
+        }),*/
+        computed:{
+            people: function(){
+                return this.$store.getters.filteredPeople;
+            }
+        },
+        mounted(route, redirect, next) {
+            this.$store.dispatch('fetch');
+        },
+        methods: {
+            deletePerson: function (person) {
+                peopleService
+                    .delete(person.id)
+                    .then((people) => {
+                        this._people = this.people = people;
+                    })
+                    .catch(console.log)
+            },
+            addPerson: function (person) {
+                peopleService
+                    .create(person)
+                    .then((person) => {
+                        this._people.push(person);
+                        this.hideDialog();
+                    })
+                    .catch(console.log)
+            },
+            showDialog() {
+                this.$refs['dialog'].open();
+                this.showModal = true;
+            },
+            hideDialog() {
+                this.$refs['dialog'].close();
+                this.showModal = false;
+            },
+            filterPeople(search) {
+                this.$store.commit(types.FILTER,search);
+            }
+        }
+    }
+
+</script>
+
+<style scoped>
+    .container {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .header {
+        text-align: center;
+    }
+  
+    .header h1 {
+        font-weight: bold;
+    }
+
+</style>
