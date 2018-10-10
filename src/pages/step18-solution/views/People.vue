@@ -78,7 +78,7 @@
                 }
                 else {
                     this.people = this._people.filter(item => {
-                        return item.firstname.toLowerCase().indexOf(search) != -1 || item.lastname.toLowerCase().indexOf(search) != -1;
+                        return item.firstname.toLowerCase().indexOf(search.toLowerCase()) != -1 || item.lastname.toLowerCase().indexOf(search.toLowerCase()) != -1;
                     });
                 }
             }
