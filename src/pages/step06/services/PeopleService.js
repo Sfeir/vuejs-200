@@ -1,6 +1,6 @@
 // import axios from 'axios'
 
-// const BACKEND_URL='http://localhost:9000/api/peoples'
+// const BACKEND_URL= process.env.VUE_APP_BACKEND_URL
 
 export default {
     
