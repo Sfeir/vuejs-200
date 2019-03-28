@@ -119,6 +119,9 @@ module.exports = {
       },
       step19_solution: {
         entry: 'src/pages/step19-solution/main.js'
+      },
+      step20: {
+        entry: 'src/pages/step20/main.js'
       }
     },
     devServer: {
@@ -162,6 +165,7 @@ module.exports = {
           { from: /\/step18$/, to: '/step18.html' },
           { from: /\/step19_solution/, to: '/step19_solution.html' },
           { from: /\/step19$/, to: '/step19.html' },
+          { from: /\/step20$/, to: '/step20.html' },
         ]
       }
   }
