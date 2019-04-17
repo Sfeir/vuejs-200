@@ -5,7 +5,7 @@
             <form @submit="submit">
                 <md-input-container>
                     <label>Firstname</label>
-                    <md-input name="firstname" v-model="person.lastname"></md-input>                    
+                    <md-input name="firstname" v-model="person.firstname"></md-input>                    
                 </md-input-container>
                 <md-input-container>
                     <label>Lastname</label>
