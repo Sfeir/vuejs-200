@@ -73,6 +73,7 @@
                 this.showModal = false;
             },
             filterPeople(search) {
+                search = search.toLowerCase()
                 if (!search) {
                     this.people = this._people
                 }
